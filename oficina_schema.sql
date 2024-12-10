@@ -70,3 +70,21 @@ constraint fk_servico_os foreign key (servico_id) references servico(id_servico)
 constraint fk_os_servico foreign key (os_id) references ordem_de_servico(id_ordem_de_servico)
 );
 
+-- Create index index_hash_modelo on veiculo(Modelo) using hash
+-- Create index index_especialidade_mecanico on mecanico(Especialidade) using hash
+
+delimiter \\
+Create procedure insere_veiculo(
+in modelo varchar(45),
+in ano int,
+in cliente int,
+in equipe int
+)
+begin 
+    Insert into veiculo(Modelo, Ano, cliente_id, equipe_id) values (modelo, ano, cliente, equipe);
+    Select * from veiculo;
+
+end \\
+delimiter ;
+
+call insere_veiculo('Palio', 2006, 1, 1);
